@@ -1,0 +1,127 @@
+erDiagram
+    users ||--o{ sessions : "possui"
+    users ||--o{ memberships : "participa"
+    communities ||--o{ memberships : "tem membros"
+    users ||--o{ communities : "cria"
+
+    communities ||--o{ tracks : "tem"
+    tracks ||--o{ lessons : "contém"
+    lessons ||--o{ lesson_progress : "registra"
+    users ||--o{ lesson_progress : "completa"
+
+    communities ||--o{ channels : "tem"
+    channels ||--o{ messages : "contém"
+    users ||--o{ messages : "escreve"
+
+    communities ||--o{ challenges : "tem"
+    challenges ||--o{ challenge_submissions : "recebe"
+    users ||--o{ challenge_submissions : "envia"
+
+    communities ||--o{ point_transactions : "escopo"
+    users ||--o{ point_transactions : "recebe"
+
+    users {
+        uuid id PK
+        text email UK "único global, case-insensitive"
+        text password_hash "argon2id"
+        text display_name
+        timestamptz created_at
+        timestamptz updated_at
+    }
+
+    sessions {
+        text token_hash PK "guarda o hash, nunca o token"
+        uuid user_id FK
+        timestamptz expires_at
+        timestamptz created_at
+    }
+
+    communities {
+        uuid id PK
+        text slug UK "único global, usado na URL"
+        text name
+        text description
+        uuid created_by FK "auditoria, não autorização"
+        timestamptz created_at
+    }
+
+    memberships {
+        uuid community_id PK, FK
+        uuid user_id PK, FK
+        text role "owner | moderator | member"
+        timestamptz joined_at
+    }
+
+    tracks {
+        uuid id PK
+        uuid community_id FK
+        text title
+        text description
+        int position "ordem na comunidade"
+        timestamptz created_at
+    }
+
+    lessons {
+        uuid id PK
+        uuid community_id FK
+        uuid track_id FK "FK composta (track_id, community_id)"
+        text title
+        text video_url "embed externo no MVP"
+        int position "ordem na trilha"
+        timestamptz created_at
+    }
+
+    lesson_progress {
+        uuid user_id PK, FK
+        uuid lesson_id PK, FK
+        uuid community_id FK
+        timestamptz completed_at
+    }
+
+    channels {
+        uuid id PK
+        uuid community_id FK "UK (community_id, name)"
+        text name
+        timestamptz created_at
+    }
+
+    messages {
+        uuid id PK
+        uuid community_id FK
+        uuid channel_id FK "FK composta (channel_id, community_id)"
+        uuid author_id FK
+        text content
+        timestamptz created_at
+        timestamptz edited_at "nullable"
+        timestamptz deleted_at "nullable, soft delete"
+    }
+
+    challenges {
+        uuid id PK
+        uuid community_id FK
+        text title
+        text description
+        int points "pontos ao enviar"
+        timestamptz starts_at
+        timestamptz ends_at
+        timestamptz created_at
+    }
+
+    challenge_submissions {
+        uuid id PK
+        uuid community_id FK
+        uuid challenge_id FK "UK (challenge_id, user_id)"
+        uuid user_id FK
+        text content
+        timestamptz submitted_at
+    }
+
+    point_transactions {
+        uuid id PK
+        uuid community_id FK
+        uuid user_id FK
+        int amount "pode ser negativo"
+        text reason "lesson_completed | challenge_submitted | manual"
+        uuid reference_id "nullable, UK (user_id, reason, reference_id)"
+        timestamptz created_at
+    }
