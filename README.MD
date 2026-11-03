@@ -1,6 +1,6 @@
 # Hello
 
-/ # Frontend
+ # Frontend
 
 The main options considered were React and Svelte.
 
@@ -9,6 +9,6 @@ React because it has a bigger ecosystem, is more popular, and has more libraries
 I found some good Svelte content on YouTube, and I think that because it's simpler, it requires fewer decisions at the beginning, which reduces the chances of making things unnecessarily complicated during development.
 
 
-/ # Database & Migrations
+ # Database & Migrations
 
 This project uses PostgresSQL as our database, and we have a few migrations
