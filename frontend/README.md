@@ -1,56 +1,26 @@
-# sv
+# README
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+## How this project was generated
 
-## Creating a project
+I used **SvelteKit**, which gave me a ready-made template with a few options to make development easier.
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```sh
-# create a new project
-npx sv create my-app
-```
-
-To recreate this project with the same configuration:
+To create the project:
 
 ```sh
-# recreate this project
-npx sv@1.2.0 create --template minimal --types ts --add prettier eslint vitest="usages:component,unit" tailwindcss="plugins:forms" --install npm frontend
+npx sv create frontend
 ```
 
-## Adding features
+This command opens a wizard with a few questions and generates the project with the chosen tools (TypeScript, ESLint, Prettier, Vitest and Tailwind CSS). That is how all the files below came about; they were not created one by one. Below is a brief explanation of what each one is.
 
-Add features to your project with `sv add`:
+## What each file and folder does
 
-```sh
-npx sv add
-```
-
-For example, to add Tailwind CSS:
-
-```sh
-npx sv add tailwindcss
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+- `src/` → It is **the actual site**: the screens, the texts, what the user sees. Each folder inside `routes/` becomes an address of the site.
+- `static/` → Static files, such as images and icons, made available as they are.
+- `package.json` → The list of everything the project needs to work, and of the commands to use it.
+- `package-lock.json` → The same list, but with the exact version of each item, so everyone installs the same thing.
+- `vite.config.ts` → Connects the tools to each other and makes the site show up in the browser, updating by itself when you save.
+- `tsconfig.json` → Rules for writing code more safely, catching errors early, right in the editor.
+- `eslint.config.js` → A tool that underlines errors in the code and warns about slips before the site runs.
+- `prettier.config.js` and `.prettierignore` → Automatically tidy up how the code looks (spacing, quotes) so everyone writes in the same style; `.prettierignore` says what not to touch.
+- `.npmrc` → Configuration file for **npm**: stores options for how npm should behave in this project, for example requiring a compatible Node version at install time.
+EOF
