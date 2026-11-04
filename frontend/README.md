@@ -2,15 +2,13 @@
 
 ## How this project was generated
 
-I used **SvelteKit**, which gave me a ready-made template with a few options to make development easier.
-
 To create the project:
 
 ```sh
 npx sv create frontend
 ```
 
-This command opens a wizard with a few questions and generates the project with the chosen tools (TypeScript, ESLint, Prettier, Vitest and Tailwind CSS). That is how all the files below came about; they were not created one by one. Below is a brief explanation of what each one is.
+This command opens a wizard with a few questions and generates the project with the chosen tools (TypeScript, ESLint, Prettier, Vitest and Tailwind CSS). That is how all the files below came about. Below is a brief explanation of what each one is.
 
 ## What each file and folder does
 
@@ -23,4 +21,3 @@ This command opens a wizard with a few questions and generates the project with 
 - `eslint.config.js` → A tool that underlines errors in the code and warns about slips before the site runs.
 - `prettier.config.js` and `.prettierignore` → Automatically tidy up how the code looks (spacing, quotes) so everyone writes in the same style; `.prettierignore` says what not to touch.
 - `.npmrc` → Configuration file for **npm**: stores options for how npm should behave in this project, for example requiring a compatible Node version at install time.
-EOF
