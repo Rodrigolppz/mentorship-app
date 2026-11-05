@@ -1,7 +1,9 @@
 package main
 
-import "fmt"
+import "net/http"
 
 func main() {
-	fmt.Println("Func main")
+	app := &application{}
+
+	http.ListenAndServe(":3333", app.mount())
 }
