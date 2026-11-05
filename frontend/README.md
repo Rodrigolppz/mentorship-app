@@ -1,6 +1,6 @@
-# README
+# Frontend
 
-## How this project was generated
+## How this frontend was generated
 
 To create the project:
 
